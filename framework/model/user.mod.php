@@ -83,6 +83,7 @@ function user_check($user) {
 	}
 	if (!empty($user['password'])) {
 		$password = user_hash($user['password'], $record['salt']);
+		// var_dump($password);die;
 		return $password == $record['password'];
 	}
 	return true;
