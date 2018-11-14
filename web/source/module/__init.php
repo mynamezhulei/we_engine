@@ -31,3 +31,5 @@ if (in_array($action, array('display'))) {
 $module_all_support = module_support_type();
 $module_support = !empty($module_all_support[$_GPC['support']]) ? $module_all_support[$_GPC['support']]['type'] : ACCOUNT_TYPE_SIGN;
 $module_support_name = $_GPC['support'];
+
+	$_GPC['account_type'] = !empty($_GPC['account_type']) ? $_GPC['account_type'] : ACCOUNT_TYPE_OFFCIAL_NORMAL;

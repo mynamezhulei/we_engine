@@ -115,10 +115,6 @@ if($step == 1) {
 		$update['type'] = ACCOUNT_TYPE_OFFCIAL_NORMAL;
 		$update['encodingaeskey'] = trim($_GPC['encodingaeskey']);
 		
-			if (user_is_vice_founder()) {
-				uni_user_account_role($uniacid, $_W['uid'], ACCOUNT_MANAGE_NAME_VICE_FOUNDER);
-			}
-		
 
 		if (empty($acid)) {
 			$acid = account_create($uniacid, $update);
@@ -130,22 +126,16 @@ if($step == 1) {
 				uni_user_account_role($uniacid, $_W['uid'], ACCOUNT_MANAGE_NAME_OWNER);
 			}
 			
-				if (!empty($_W['user']['owner_uid'])) {
-					uni_user_account_role($uniacid, $_W['user']['owner_uid'], ACCOUNT_MANAGE_NAME_VICE_FOUNDER);
-				}
-			
 		} else {
 			pdo_update('account', array('type' => ACCOUNT_TYPE_OFFCIAL_NORMAL, 'hash' => ''), array('acid' => $acid, 'uniacid' => $uniacid));
 			unset($update['type']);
 			pdo_update('account_wechats', $update, array('acid' => $acid, 'uniacid' => $uniacid));
 		}
-		$qrcode = safe_gpc_path($_GPC['qrcode']);
-		$headimg = safe_gpc_path($_GPC['headimg']);
-		if(file_is_image($qrcode)) {
-			copy($qrcode, IA_ROOT . '/attachment/qrcode_'.$acid.'.jpg');
+		if(parse_path($_GPC['qrcode']) && in_array(pathinfo($_GPC['qrcode'], PATHINFO_EXTENSION), $_W['config']['upload']['image']['extentions'])) {
+			copy($_GPC['qrcode'], IA_ROOT . '/attachment/qrcode_'.$acid.'.jpg');
 		}
-		if(file_is_image($headimg)) {
-			copy($headimg, IA_ROOT . '/attachment/headimg_'.$acid.'.jpg');
+		if(parse_path($_GPC['headimg']) && in_array(pathinfo($_GPC['qrcode'], PATHINFO_EXTENSION), $_W['config']['upload']['image']['extentions'])) {
+			copy($_GPC['headimg'], IA_ROOT . '/attachment/headimg_'.$acid.'.jpg');
 		}
 				$oauth = uni_setting($uniacid, array('oauth'));
 		if ($acid && !empty($update['key']) && !empty($update['secret']) && empty($oauth['oauth']['account']) && $update['level'] == ACCOUNT_SERVICE_VERIFY) {
@@ -195,10 +185,6 @@ if($step == 1) {
 				uni_user_account_role($uniacid, $uid, ACCOUNT_MANAGE_NAME_OWNER);
 			}
 			$user_vice_id = pdo_getcolumn('users', array('uid' => $uid), 'owner_uid');
-			
-				if ($_W['user']['founder_groupid'] != ACCOUNT_MANAGE_GROUP_VICE_FOUNDER && !empty($user_vice_id)) {
-					uni_user_account_role($uniacid, $user_vice_id, ACCOUNT_MANAGE_NAME_VICE_FOUNDER);
-				}
 			
 		}
 		if (!empty($_GPC['signature'])) {
@@ -360,12 +346,8 @@ if($step == 1) {
 	$acid = intval($_GPC['acid']);
 	$uni_account = pdo_get('uni_account', array('uniacid' => $uniacid));
 	if (empty($uni_account)) {
-		itoast('非法访问');
-	}
-	$owner_info = account_owner($uniacid);
-	if (!(user_is_founder($_W['uid'], true) || $_W['uid'] == $owner_info['uid'])) {
-		itoast('非法访问');
+		itoast('非法访问', '', '');
 	}
 	$account = account_fetch($uni_account['default_acid']);
 }
-template('account/post-step');
+template('account/post-step' . $template_show);

@@ -42,14 +42,14 @@ if (!$entry['direct']) {
 			itoast('', $_W['siteurl'] . '&version_id=' . $referer['version_id']);
 	}
 	
-		if (empty($_W['uniacid']) && $entry['entry'] != 'system_welcome' && $_GPC['module_type'] != 'system_welcome') {
+	
+		if (empty($_W['uniacid'])) {
 			if (!empty($_GPC['version_id'])) {
 				itoast('', url('account/display', array('type' => WXAPP_TYPE_SIGN)));
 			} else {
 				itoast('', url('account/display'));
 			}
 		}
-	
 	
 
 	if ($entry['entry'] == 'menu') {
@@ -82,15 +82,9 @@ $_GPC['do'] = $entry['do'];
 $_W['current_module'] = $module;
 
 
-	if ($entry['entry'] == 'system_welcome' || $_GPC['module_type'] == 'system_welcome') {
-		$_GPC['module_type'] = 'system_welcome';
-		define('SYSTEM_WELCOME_MODULE', true);
-		$site = WeUtility::createModuleSystemWelcome($entry['module']);
-	} else {
-		$site = WeUtility::createModuleSite($entry['module']);
-	}
 
 
+	$site = WeUtility::createModuleSite($entry['module']);
 
 
 define('IN_MODULE', $entry['module']);
@@ -104,9 +98,8 @@ if (!is_error($site)) {
 		$site_urls = $site->getTabUrls();
 	}
 	
+		$method = 'doWeb' . ucfirst($entry['do']);
 	
-		$do_function = defined('SYSTEM_WELCOME_MODULE') ? 'doPage' : 'doWeb';
-		$method = $do_function . ucfirst($entry['do']);
 	
 	exit($site->$method());
 }

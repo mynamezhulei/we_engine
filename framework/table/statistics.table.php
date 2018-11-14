@@ -6,10 +6,10 @@
 
 defined('IN_IA') or exit('Access Denied');
 class StatisticsTable extends We7Table {
-
+	
 	protected $stat_fans_table ='stat_fans';
 	protected $stat_visit_table = 'stat_visit';
-
+	
 	public function visitList($params, $type = 'more') {
 		global $_W;
 		$this->query->from($this->stat_visit_table);

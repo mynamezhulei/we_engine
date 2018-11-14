@@ -23,16 +23,6 @@ if (!empty($version_id)) {
 	$is_single_module_wxapp = $version_info['type'] == WXAPP_CREATE_MODULE; }
 
 
-		if ($do == 'entrychoose') {
-		$entrys = $version_info['cover_entrys'];
-		template('wxapp/version-front-download');
-	}
-		if ($do == 'set_wxapp_entry') {
-		$entry_id = intval($_GPC['entry_id']);
-		$result = miniapp_update_entry($version_id, $entry_id);
-		iajax(0, '设置入口成功');
-	}
-
 
 if ($do == 'custom') {
 	$default_appjson = miniapp_code_current_appjson($version_id);

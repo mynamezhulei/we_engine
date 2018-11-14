@@ -24,23 +24,6 @@ $dos = array('subscribe', 'check_subscribe', 'check_upgrade', 'get_upgrade_info'
 $do = in_array($do, $dos) ? $do : 'installed';
 
 
-	if (user_is_vice_founder() && !empty($_GPC['system_welcome'])){
-		itoast('无权限操作！');
-	}
-	if ($do == 'set_site_welcome_module') {
-		if (!$_W['isfounder']) {
-			iajax(1, '非法操作');
-		}
-		if (!empty($_GPC['name'])) {
-			$site = WeUtility::createModuleSystemWelcome($_GPC['name']);
-			if (!method_exists($site, 'systemWelcomeDisplay')) {
-				iajax(1, '应用未实现系统首页功能！');
-			}
-		}
-		setting_save(trim($_GPC['name']), 'site_welcome_module');
-		iajax(0);
-	}
-
 
 if ($do == 'subscribe') {
 	$module_uninstall_total = module_uninstall_total($module_support);

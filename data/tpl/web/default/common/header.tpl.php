@@ -135,7 +135,7 @@
 		return false;
 	}
 </script>
-<?php  } ?> 
+<?php  } ?>
 <div class="main">
 <?php  if(!defined('IN_MESSAGE')) { ?>
 <div class="container">
@@ -157,10 +157,10 @@
 				<?php  if(is_array($frames['section'])) { foreach($frames['section'] as $frame_section_id => $frame_section) { ?>
 
 				
-				<?php  if(FRAME == 'store' && !($_W['isfounder'] && !user_is_vice_founder()) && !empty($frame_section['founder'])) { ?>
+				
+				<?php  if(FRAME == 'store' && !($_W['isfounder']) && !empty($frame_section['founder'])) { ?>
 				<?php  continue;?>
 				<?php  } ?>
-				
 				
 
 				<?php  if(!isset($frame_section['is_display']) || !empty($frame_section['is_display'])) { ?>

@@ -75,12 +75,15 @@ function user_check($user) {
 		return false;
 	}
 	$sql = 'SELECT `password`,`salt` FROM ' . tablename('users') . "$where LIMIT 1";
+	// var_dump($sql);die;
 	$record = pdo_fetch($sql, $params);
+	// var_dump(pdo_debug());die;
 	if (empty($record) || empty($record['password']) || empty($record['salt'])) {
 		return false;
 	}
 	if (!empty($user['password'])) {
 		$password = user_hash($user['password'], $record['salt']);
+		// var_dump($password);die;
 		return $password == $record['password'];
 	}
 	return true;
@@ -136,7 +139,13 @@ function user_delete($uid, $is_recycle = false) {
 	return true;
 }
 
-
+/**
+ * @Author   ZL
+ * @DateTime 2018-11-13T15:21:58+0800
+ * @email    987968469@qq.com
+ * @param    账号和密码		
+ * @return   校验用户登陆是否正确
+ */
 function user_single($user_or_uid) {
 	$user = $user_or_uid;
 	if (empty($user)) {

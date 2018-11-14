@@ -17,12 +17,12 @@
 		</div>
 	</form>
 	
-		{if !empty($account_info['wxapp_limit']) && (!empty($account_info['founder_wxapp_limit']) && $_W['user']['owner_uid'] || empty($_W['user']['owner_uid'])) || $_W['isfounder'] && !user_is_vice_founder()}
+	
+		{if !empty($account_info['wxapp_limit']) || $_W['isfounder']}
 		<div class="pull-right">
 			<a href="{php echo url('miniapp/post', array('type' => ACCOUNT_TYPE_ALIAPP_NORMAL))}" class="btn btn-primary we7-padding-horizontal">添加支付宝小程序</a>
 		</div>
 		{/if}
-	
 	
 </div>
 <table class="table we7-table table-hover vertical-middle table-manage" id="js-system-account-display" ng-controller="SystemAccountDisplay" ng-cloak>

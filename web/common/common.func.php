@@ -160,8 +160,7 @@ function buildframes($framename = ''){
 					}
 				}
 				
-				
-					if ($nav_id != 'wxapp' && $nav_id != 'store') {
+					if ($nav_id != 'wxapp') {
 						$section_show = false;
 						$secion['if_fold'] = !empty($_GPC['menu_fold_tag:'.$section_id]) ? 1 : 0;
 						foreach ($secion['menu'] as $menu_id => $menu) {
@@ -175,6 +174,7 @@ function buildframes($framename = ''){
 							$frames[$nav_id]['section'][$section_id]['is_display'] = $section_show;
 						}
 					}
+				
 				
 			}
 
@@ -429,18 +429,6 @@ function buildframes($framename = ''){
 			}
 		}
 		
-			if (!empty($entries['system_welcome']) && $_W['isfounder']) {
-				$frames['account']['section']['platform_module_welcome']['title'] = '';
-				foreach ($entries['system_welcome'] as $key => $row) {
-					if (empty($row)) continue;
-					$frames['account']['section']['platform_module_welcome']['menu']['platform_module_welcome' . $row['eid']] = array (
-						'title' => "<i class='wi wi-appsetting'></i> {$row['title']}",
-						'url' => $row['url'],
-						'is_display' => 1,
-					);
-				}
-			}
-		
 	}
 
 	if (defined('FRAME') && FRAME == 'account') {
@@ -565,15 +553,10 @@ function frames_top_menu($frames) {
 	$is_vice_founder = user_is_vice_founder();
 	foreach ($frames as $menuid => $menu) {
 		
-		
-			if (!empty($menu['founder']) && empty($_W['isfounder']) ||
-				is_array($_W['setting']['store']['blacklist']) && in_array($_W['username'], $_W['setting']['store']['blacklist'])&& !empty($_W['setting']['store']['permission_status']) && $_W['setting']['store']['permission_status']['blacklist'] && $menuid == 'store' ||
-				is_array($_W['setting']['store']['whitelist']) && !in_array($_W['username'], $_W['setting']['store']['whitelist']) && !empty($_W['setting']['store']['permission_status']) && $_W['setting']['store']['permission_status']['whitelist'] && !($_W['isfounder'] && !$is_vice_founder) && $menuid == 'store' ||
-				$is_vice_founder && in_array($menuid, array('site', 'advertisement', 'appmarket')) ||
-				$_W['role'] == ACCOUNT_MANAGE_NAME_CLERK && in_array($menuid, array('account', 'wxapp', 'system', 'platform')) ||
-				!$menu['is_display'] || $_W['setting']['store']['status'] == 1 && $menuid == 'store' && (!$_W['isfounder'] || $is_vice_founder)) {
+			if (!empty($menu['founder']) && empty($_W['isfounder']) || $is_vice_founder && in_array($menuid, array('site', 'advertisement', 'appmarket')) || $_W['role'] == ACCOUNT_MANAGE_NAME_CLERK && in_array($menuid, array('account', 'wxapp', 'system', 'platform')) || !$menu['is_display']) {
 				continue;
 			}
+		
 		
 		$top_nav[] = array(
 			'title' => $menu['title'],

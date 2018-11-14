@@ -27,6 +27,7 @@ $login_urls = user_support_urls();
 template('user/login');
 
 function _login($forward = '') {
+
 	global $_GPC, $_W;
 	if (empty($_GPC['login_type'])) {
 		$_GPC['login_type'] = 'system';
@@ -55,6 +56,7 @@ function _login($forward = '') {
 	}
 
 	$record = user_single($member);
+	//var_dump($record);die;
 	$failed = pdo_get('users_failed_login', array('username' => trim($_GPC['username'])));
 	if (!empty($record)) {
 		if ($record['status'] == USER_STATUS_CHECK || $record['status'] == USER_STATUS_BAN) {

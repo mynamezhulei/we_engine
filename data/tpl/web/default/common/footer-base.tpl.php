@@ -23,7 +23,5 @@
 	<?php  } ?>
 	</div>
 	
-		<script type="text/javascript" src="<?php  echo $_W['siteroot'];?>web/index.php?c=utility&a=visit&do=showjs&type=<?php echo FRAME;?>"></script>
-	
 </body>
 </html>

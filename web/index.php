@@ -1,6 +1,6 @@
 <?php
 /**
- * [WeEngine System] Copyright (c) 20181025112642 WE7.CC
+ * [WeEngine System] Copyright (c) 20181025112640 WE7.CC
  * WeEngine is NOT a free software, it under the license terms, visited http://www.we7.cc/ for more details.
  */
 define('IN_SYS', true);
@@ -40,8 +40,8 @@ if (($_W['setting']['copyright']['status'] == 1) && empty($_W['isfounder']) && $
 	}
 	isetcookie('__session', '', - 10000);
 	
+		message('站点已关闭，关闭原因：' . $_W['setting']['copyright']['reason'], url('user/login'), 'info');
 	
-		message('站点已关闭，关闭原因：' . $_W['setting']['copyright']['reason'], url('account/welcome'), 'info');
 	
 }
 

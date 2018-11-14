@@ -105,11 +105,6 @@ if ($do == 'post') {
 						'type' => 0
 		);
 		
-			if (!in_array($create_type, array(WXAPP_CREATE_DEFAULT, WXAPP_CREATE_MODULE, WXAPP_CREATE_MUTI_MODULE))) {
-				$create_type = WXAPP_CREATE_DEFAULT;
-			}
-			$wxapp_version['type'] = $create_type;
-		
 				if ($design_method == WXAPP_TEMPLATE) {
 			$multi_data = array(
 				'uniacid' => $uniacid,

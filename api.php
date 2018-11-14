@@ -8,8 +8,6 @@ require_once './framework/bootstrap.inc.php';
 load()->model('reply');
 load()->model('attachment');
 
-	load()->model('visit');
-
 load()->app('common');
 load()->classs('wesession');
 $hash = $_GPC['hash'];
@@ -50,8 +48,6 @@ $_W['account']['groupid'] = $_W['uniaccount']['groupid'];
 $_W['account']['qrcode'] = $_W['attachurl'].'qrcode_'.$_W['acid'].'.jpg?time='.$_W['timestamp'];
 $_W['account']['avatar'] = $_W['attachurl'].'headimg_'.$_W['acid'].'.jpg?time='.$_W['timestamp'];
 $_W['attachurl'] = attachment_set_attach_url();
-
-	visit_update_today('web', 'we7_api');
 
 
 $engine = new WeEngine();

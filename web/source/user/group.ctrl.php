@@ -24,11 +24,6 @@ if ($do == 'display') {
 		$params[':name'] = "%{$name}%";
 	}
 	
-		if (user_is_vice_founder()) {
-			$condition .= "WHERE owner_uid = :owner_uid";
-			$params[':owner_uid'] = $_W['uid'];
-		}
-	
 	$lists = pdo_fetchall("SELECT * FROM " . tablename('users_group') . $condition . " LIMIT " . ($pageindex - 1) * $pagesize . "," . $pagesize, $params);
 	$lists = user_group_format($lists);
 

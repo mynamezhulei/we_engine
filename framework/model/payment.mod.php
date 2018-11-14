@@ -312,14 +312,6 @@ function payment_setting() {
 		);
 	}
 	
-		if (empty($pay_setting['wechat_facilitator'])) {
-			$pay_setting['wechat_facilitator'] = array(
-				'switch' => false,
-				'mchid' => '',
-				'signkey' => '',
-			);
-		}
-	
 		if (empty($_W['isfounder'])) {
 		$user_account_list = pdo_getall('uni_account_users', array('uid' => $_W['uid']), array(), 'uniacid');
 		$param['uniacid'] = array_keys($user_account_list);

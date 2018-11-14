@@ -54,11 +54,6 @@ if ($do == 'display') {
 		$params[':name'] = "%{$name}%";
 	}
 	
-		if (user_is_vice_founder()) {
-			$condition .= " AND owner_uid = :owner_uid";
-			$params[':owner_uid'] = $_W['uid'];
-		}
-	
 	$modules_group_list = pdo_fetchall("SELECT * FROM " . tablename('uni_group') . $condition . " LIMIT " . ($pageindex - 1) * $pagesize . "," . $pagesize, $params);
 	$total = pdo_fetchcolumn("SELECT COUNT(*) FROM " . tablename('uni_group') . $condition, $params);
 	$pager = pagination($total, $pageindex, $pagesize);
@@ -213,13 +208,9 @@ if ($do == 'post') {
 	}
 
 	
-		if (user_is_vice_founder($_W['uid'])) {
-			$template_list = user_founder_templates($_W['user']['groupid']);
-		} else {
-			$template_list = pdo_getall('site_templates', array(), array(), 'name');
-		}
-	
 
+	
+		$template_list = pdo_getall('site_templates', array(), array(), 'name');
 	
 
 	$group_not_have_template = array();	if (!empty($template_list)) {

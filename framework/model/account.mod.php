@@ -145,25 +145,6 @@ function uni_modules_by_uniacid($uniacid) {
 		if (!empty($owner_uid) && !in_array($owner_uid, $founders)) {
 						$group_modules = table('account')->accountGroupModules($uniacid, $type);
 						
-				$goods_type = 0;
-				switch ($account_info['type']) {
-					case ACCOUNT_TYPE_OFFCIAL_NORMAL:
-					case ACCOUNT_TYPE_OFFCIAL_AUTH:
-						$goods_type = STORE_TYPE_MODULE;
-						break;
-					case ACCOUNT_TYPE_APP_NORMAL:
-					case ACCOUNT_TYPE_APP_AUTH:
-					case ACCOUNT_TYPE_WXAPP_WORK:
-						$goods_type = STORE_TYPE_WXAPP_MODULE;
-						break;
-				}
-				if ($goods_type) {
-					$site_store_buy_goods = uni_site_store_buy_goods($uniacid, $goods_type);
-					if (!empty($site_store_buy_goods)) {
-						$group_modules = array_merge($group_modules, $site_store_buy_goods);
-					}
-				}
-			
 						$user_modules = user_modules($owner_uid);
 			if (!empty($user_modules)) {
 				$group_modules = array_unique(array_merge($group_modules, array_keys($user_modules)));
@@ -243,25 +224,6 @@ function uni_modules_list($uniacid, $type = '') {
 	if (!empty($owner_uid) && !in_array($owner_uid, $founders)) {
 				$group_modules = table('account')->accountGroupModules($uniacid, $type);
 				
-			$goods_type = 0;
-			switch ($type) {
-				case ACCOUNT_TYPE_OFFCIAL_NORMAL:
-				case ACCOUNT_TYPE_OFFCIAL_AUTH:
-					$goods_type = STORE_TYPE_MODULE;
-					break;
-				case ACCOUNT_TYPE_APP_NORMAL:
-				case ACCOUNT_TYPE_APP_AUTH:
-				case ACCOUNT_TYPE_WXAPP_WORK:
-					$goods_type = STORE_TYPE_WXAPP_MODULE;
-					break;
-			}
-			if ($goods_type) {
-				$site_store_buy_goods = uni_site_store_buy_goods($uniacid, $goods_type);
-				if (!empty($site_store_buy_goods)) {
-					$group_modules = array_merge($group_modules, $site_store_buy_goods);
-				}
-			}
-		
 				$user_modules = user_modules($owner_uid);
 		if (!empty($user_modules)) {
 			$group_modules = array_merge($group_modules, array_keys($user_modules));

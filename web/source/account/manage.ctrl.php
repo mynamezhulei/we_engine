@@ -83,11 +83,11 @@ if ($do == 'delete') {
 	$type = intval($_GPC['type']);
 		$state = permission_account_user_role($uid, $uniacid);
 	
-		if (!in_array($state, array(ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_FOUNDER, ACCOUNT_MANAGE_NAME_VICE_FOUNDER))) {
+
+	
+		if (!in_array($state, array(ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_FOUNDER))) {
 			itoast('无权限操作！', url('account/manage'), 'error');
 		}
-	
-
 	
 
 	if (!empty($acid) && empty($uniacid)) {
@@ -111,11 +111,11 @@ if ($do == 'delete') {
 		$state = permission_account_user_role($uid, $uniacid);
 
 		
-			if (!in_array($state, array(ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_FOUNDER, ACCOUNT_MANAGE_NAME_VICE_FOUNDER))) {
+
+		
+			if (!in_array($state, array(ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_FOUNDER))) {
 				itoast('没有该'. ACCOUNT_TYPE_NAME . '操作权限！', url('account/manage', array('account_type' => ACCOUNT_TYPE)), 'error');
 			}
-		
-
 		
 
 		pdo_update('account', array('isdeleted' => 1), array('uniacid' => $uniacid));

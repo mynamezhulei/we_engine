@@ -8,17 +8,13 @@
 	<div class="btn-group we7-btn-group we7-padding-bottom">
 		<a href="{php echo url('message/notice')}" class="btn btn-default {if empty($type)} active {/if}">全部</a>
 		
-		{if $_W['isfounder'] && uni_user_see_more_info(ACCOUNT_MANAGE_NAME_VICE_FOUNDER, false)}
-		<a href="{php echo url('message/notice', array('type' => MESSAGE_ORDER_TYPE))}" class="btn btn-default {if $type == MESSAGE_ORDER_TYPE} active {/if}">订单消息</a>
-		{/if}
-		
 		<a href="{php echo url('message/notice', array('type' => MESSAGE_ACCOUNT_EXPIRE_TYPE))}" class="btn btn-default {if $type == MESSAGE_ACCOUNT_EXPIRE_TYPE} active {/if}">到期消息</a>
 		
-		{if $_W['isfounder'] && uni_user_see_more_info(ACCOUNT_MANAGE_NAME_VICE_FOUNDER, false)}
+		
+		{if $_W['isfounder']}
 		<a href="{php echo url('message/notice', array('type' => MESSAGE_REGISTER_TYPE))}" class="btn btn-default {if $type == MESSAGE_REGISTER_TYPE} active {/if}">注册提醒</a>
 		<a href="{php echo url('message/notice', array('type' => MESSAGE_WORKORDER_TYPE))}" class="btn btn-default {if $type == MESSAGE_WORKORDER_TYPE} active {/if}">工单提醒</a>
 		{/if}
-		
 		
 		{if user_is_founder($_W['uid'], true)}
 		<a href="{php echo url('message/notice', array('type' => MESSAGE_SYSTEM_UPGRADE))}" class="btn btn-default {if $type == MESSAGE_SYSTEM_UPGRADE} active {/if}">系统更新</a>
@@ -60,8 +56,6 @@
 			<td class="text-muted text-center" ng-bind = "list.create_time"></td>
 			<td>
 				<div class="link-group">
-					
-					<a ng-href="{{list.url}}" ng-if="list.type==1">查看我的订单</a>
 					
 					<a ng-href="{{list.url}}" ng-if="list.type==3">进入工单</a>
 					<a ng-href="{{list.url}}" ng-if="list.type==2">查看公众号</a>

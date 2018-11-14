@@ -3,24 +3,24 @@
 <ul class="we7-page-tab">
 	<li class="active"><a href="<?php  echo url('account/manage', array('account_type' => ACCOUNT_TYPE))?>"><?php  echo $account->typeName?>列表</a></li>
 	
-		<?php  if($_W['role'] == ACCOUNT_MANAGE_NAME_OWNER || $_W['role'] == ACCOUNT_MANAGE_NAME_FOUNDER || $_W['role'] == ACCOUNT_MANAGE_NAME_VICE_FOUNDER) { ?>
+	
+		<?php  if($_W['role'] == ACCOUNT_MANAGE_NAME_OWNER || $_W['role'] == ACCOUNT_MANAGE_NAME_FOUNDER) { ?>
 		<li><a href="<?php  echo url('account/recycle', array('account_type' => ACCOUNT_TYPE))?>">公众号回收站</a></li>
 		<?php  } ?>
-	
 	
 </ul>
 <div class="clearfix we7-margin-bottom">
 	
-		<?php  if(!$_W['isfounder'] && !empty($account_info['uniacid_limit']) || user_is_vice_founder()) { ?>
+	
+		<?php  if(!$_W['isfounder'] && !empty($account_info['uniacid_limit'])) { ?>
 		<div class="alert alert-warning hidden">
 			温馨提示：
 			<i class="fa fa-info-circle"></i>
-			Hi，<span class="text-strong"><?php  echo $_W['username'];?></span>，您所在的会员组： <span class="text-strong"><?php  echo $account_info['group_name'];?></span>，<?php  if(!user_is_vice_founder() && !empty($account_info['vice_group_name'])) { ?> <span class="text-strong"><?php  echo $account_info['vice_group_name'];?>，</span><?php  } ?>
+			Hi，<span class="text-strong"><?php  echo $_W['username'];?></span>，您所在的会员组： <span class="text-strong"><?php  echo $account_info['group_name'];?></span>
 			账号有效期限：<span class="text-strong"><?php  echo date('Y-m-d', $_W['user']['starttime'])?> ~~ <?php  if(empty($_W['user']['endtime'])) { ?>无限制<?php  } else { ?><?php  echo date('Y-m-d', $_W['user']['endtime'])?><?php  } ?></span>，
 			可创建 <span class="text-strong"><?php  echo $account_info['maxaccount'];?> </span>个公众号，已创建<span class="text-strong"> <?php  echo $account_info['uniacid_num'];?> </span>个，还可创建 <span class="text-strong"><?php  echo $account_info['uniacid_limit'];?> </span>个公众号。
 		</div>
 		<?php  } ?>
-	
 	
 	<form action="" class="form-inline  pull-left" method="get">
 		<input type="hidden" name="c" value="account">
@@ -32,12 +32,12 @@
 		</div>
 	</form>
 	
-	<?php  if(!empty($account_info['uniacid_limit']) && (!empty($account_info['founder_uniacid_limit']) && $_W['user']['owner_uid'] || empty($_W['user']['owner_uid'])) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
+	
+	<?php  if(!empty($account_info['uniacid_limit']) || $_W['isfounder']) { ?>
 	<div class="pull-right">
 		<a href="<?php  echo url('account/post-step');?>" class="btn btn-primary we7-padding-horizontal">添加公众号</a>
 	</div>
 	<?php  } ?>
-	
 	
 </div>
 <table class="table we7-table table-hover vertical-middle table-manage" id="js-system-account-display" ng-controller="SystemAccountDisplay" ng-cloak>

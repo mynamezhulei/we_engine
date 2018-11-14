@@ -43,14 +43,6 @@
 				<td><div class="link-group"><a href="javascript:;" data-toggle="modal" data-target="#pass">修改</a></div></td>
 			</tr>
 			
-			<?php  if(!empty($user['founder_groupid'])) { ?>
-			<tr>
-				<td class="table-label">注册链接</td>
-				<td><?php  echo $user['url'];?></td>
-				<td><div class="link-group"><a href="javascript:;" data-url="<?php  echo $user['url'];?>" class="js-clip">复制链接</a></div></td>
-			</tr>
-			<?php  } ?>
-			
 		</table>
 		<div class="modal fade" id="name" role="dialog">
 			<div class="we7-modal-dialog modal-dialog">
@@ -489,8 +481,6 @@
 				</td>
 				<td>
 					<span ng-if="wxapp.role == 'founder'">创始人</span>
-					
-					<span ng-if="wxapp.role == 'vice_founder'">副创始人</span>
 					
 					<span ng-if="wxapp.role == 'owner'">主管理员</span>
 					<span ng-if="wxapp.role == 'manager'">管理员</span>

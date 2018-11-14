@@ -12,8 +12,6 @@ $_W['page']['title'] = '系统管理 - 菜单设置';
 
 $system_top_menu = array('account', 'wxapp', 'module', 'help', 'advertisement', 'site', 'system', 'webapp', 'appmarket', 'custom_help', 'phoneapp', 'platform', 'xzapp');
 
-	array_push($system_top_menu, 'store');
-
 
 $system_menu = cache_load(cache_system_key('system_frame', array('uniacid' => $_W['uniacid'])));
 if(empty($system_menu)) {
