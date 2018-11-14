@@ -250,6 +250,9 @@ class AccountTable extends We7Table {
 		}
 		$uni_modules = array();
 		
+			$site_store_buy_package = table('store')->searchUserBuyPackage($uniacid);
+			$packageids = array_merge($packageids, array_keys($site_store_buy_package));
+		
 		$uni_groups = $this->query->from('uni_group')->where('uniacid', $uniacid)->whereor('id', $packageids)->getall('modules');
 		if (!empty($uni_groups)) {
 			if (empty($type)) {

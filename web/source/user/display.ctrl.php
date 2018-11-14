@@ -59,6 +59,10 @@ if ($do == 'display') {
 		}
 
 		
+			if (user_is_vice_founder()) {
+				$users_table->searchWithOwnerUid($_W['uid']);
+			}
+		
 		$users_table->searchWithPage($pindex, $psize);
 		$users = $users_table->searchUsersList();
 		$total = $users_table->getLastQueryTotal();
@@ -96,6 +100,10 @@ if ($do == 'operate') {
 	if (empty($uid_user)) {
 		exit('未指定用户,无法删除.');
 	}
+	
+		if ($uid_user['founder_groupid'] != ACCOUNT_MANAGE_GROUP_GENERAL) {
+			iajax(-1, '非法操作', referer());
+		}
 	
 	switch ($type) {
 		case 'check_pass':

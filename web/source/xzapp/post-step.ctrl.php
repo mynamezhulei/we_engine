@@ -103,6 +103,10 @@ if ($step == 2) {
 		$update['encodingaeskey'] = trim($_GPC['encodingaeskey']);
 
 		
+			if (user_is_vice_founder()) {
+				uni_user_account_role($uniacid, $_W['uid'], ACCOUNT_MANAGE_NAME_VICE_FOUNDER);
+			}
+		
 
 		if (empty($acid)) {
 			$acid = account_create($uniacid, $update);
@@ -113,6 +117,10 @@ if ($step == 2) {
 			if (empty($_W['isfounder'])) {
 				uni_user_account_role($uniacid, $_W['uid'], ACCOUNT_MANAGE_NAME_OWNER);
 			}
+			
+				if (!empty($_W['user']['owner_uid'])) {
+					uni_user_account_role($uniacid, $_W['user']['owner_uid'], ACCOUNT_MANAGE_NAME_VICE_FOUNDER);
+				}
 			
 		} else {
 			pdo_update('account', array('type' => ACCOUNT_TYPE_XZAPP_NORMAL, 'hash' => ''), array('acid' => $acid, 'uniacid' => $uniacid));
@@ -170,6 +178,10 @@ if ($step == 3) {
 				uni_user_account_role($uniacid, $uid, ACCOUNT_MANAGE_NAME_OWNER);
 			}
 			$user_vice_id = pdo_getcolumn('users', array('uid' => $uid), 'owner_uid');
+			
+				if ($_W['user']['founder_groupid'] != ACCOUNT_MANAGE_GROUP_VICE_FOUNDER && !empty($user_vice_id)) {
+					uni_user_account_role($uniacid, $user_vice_id, ACCOUNT_MANAGE_NAME_VICE_FOUNDER);
+				}
 			
 		}
 		$user = array(
@@ -319,6 +331,10 @@ if ($step == 4) {
 
 	if (empty($uni_account)) {
 		itoast('非法访问', '', '');
+	}
+	$owner_info = account_owner($uniacid);
+	if (!(user_is_founder($_W['uid'], true) || $_W['uid'] == $owner_info['uid'])) {
+		itoast('非法访问');
 	}
 	$account = account_fetch($uni_account['default_acid']);
 }
