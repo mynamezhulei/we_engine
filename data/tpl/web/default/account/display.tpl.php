@@ -53,41 +53,39 @@
 
 				<div class="font-default pull-right">
 					
-
-					
 					<div class="creat" ng-switch="type">
-						<?php  if(!empty($account_info['uniacid_limit']) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
-						<a href="./index.php?c=account&a=post-step" class="color-default" ng-if="type == 'account'">
+						<a ng-switch-when="all" href="javascript:;" data-toggle="modal" data-target="#owner-modal" class="color-default"><i class="wi wi-registersite"></i>新增平台</a>
+
+						<?php  if(!empty($account_info['uniacid_limit']) && (!empty($account_info['founder_uniacid_limit']) && $_W['user']['owner_uid'] || empty($_W['user']['owner_uid'])) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
+						<a ng-switch-when="account" href="./index.php?c=account&a=post-step" class="color-default">
 							<i class="wi wi-registersite"></i>新增公众号
 						</a>
 						<?php  } ?>
 
-						<?php  if(!empty($account_info['wxapp_limit']) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
-						<a href="<?php  echo url('wxapp/post/design_method')?>" class="color-default" ng-if="type == 'wxapp'">
-							<i class="wi wi-registersite"></i>新建微信小程序
-						</a>
+						<?php  if(!empty($account_info['wxapp_limit']) && (!empty($account_info['founder_wxapp_limit']) && $_W['user']['owner_uid'] || empty($_W['user']['owner_uid'])) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
+						<a ng-switch-when="wxapp" href="<?php  echo url('wxapp/post/design_method')?>" class="color-default"><i class="wi wi-registersite"></i>新建微信小程序</a>
 						<?php  } ?>
 
-						<?php  if(!empty($account_info['webapp_limit']) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
-						<a href="./index.php?c=webapp&a=manage&do=create_display" class="color-default" ng-if="type == 'webapp'">
+						<?php  if(!empty($account_info['webapp_limit']) && (!empty($account_info['founder_webapp_limit']) && $_W['user']['owner_uid'] || empty($_W['user']['owner_uid'])) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
+						<a ng-switch-when="webapp" href="./index.php?c=webapp&a=manage&do=create_display" class="color-default">
 							<i class="wi wi-registersite"></i>新增PC
 						</a>
 						<?php  } ?>
 
-						<?php  if(!empty($account_info['phoneapp_limit']) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
-						<a href="<?php  echo url('phoneapp/manage/create_display')?>" class="color-default" ng-if="type == 'phoneapp'">
-							<i class="wi wi-registersite"></i>新建APP
-						</a>
+						<?php  if(!empty($account_info['phoneapp_limit']) && (!empty($account_info['founder_phoneapp_limit']) && $_W['user']['owner_uid'] || empty($_W['user']['owner_uid'])) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
+						<a ng-switch-when="phoneapp" href="<?php  echo url('phoneapp/manage/create_display')?>" class="color-default"><i class="wi wi-registersite"></i>新建APP</a>
 						<?php  } ?>
 
-						<?php  if(!empty($account_info['xzapp_limit']) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
-						<a href="<?php  echo url('xzapp/post-step')?>" class="color-default" ng-if="type == 'xzapp'"><i class="wi wi-registersite"></i>新建熊掌号</a>
+						<?php  if(!empty($account_info['xzapp_limit']) && (!empty($account_info['founder_xzapp_limit']) && $_W['user']['owner_uid'] || empty($_W['user']['owner_uid'])) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
+						<a ng-switch-when="xzapp" href="<?php  echo url('xzapp/post-step')?>" class="color-default"><i class="wi wi-registersite"></i>新建熊掌号</a>
 						<?php  } ?>
 
-						<?php  if(!empty($account_info['aliapp_limit']) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
-						<a href="<?php  echo url('miniapp/post', array('type' => ACCOUNT_TYPE_ALIAPP_NORMAL))?>" class="color-default" ng-if="type == 'aliapp'"><i class="wi wi-registersite"></i>新建支付宝小程序</a>
+						<?php  if(!empty($account_info['aliapp_limit']) && (!empty($account_info['founder_aliapp_limit']) && $_W['user']['owner_uid'] || empty($_W['user']['owner_uid'])) || $_W['isfounder'] && !user_is_vice_founder()) { ?>
+						<a ng-switch-when="aliapp" href="<?php  echo url('miniapp/post', array('type' => ACCOUNT_TYPE_ALIAPP_NORMAL))?>" class="color-default"><i class="wi wi-registersite"></i>新建支付宝小程序</a>
 						<?php  } ?>
 					</div>
+					
+
 					
 
 					<div class="setting" ng-switch="type">

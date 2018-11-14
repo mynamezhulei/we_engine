@@ -8,10 +8,10 @@ defined('IN_IA') or exit('Access Denied');
 $dos = array('display', 'recover', 'delete');
 $do = in_array($do, $dos) ? $do : 'display';
 
-
-	if (!in_array($_W['role'], array(ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_FOUNDER))) {
+	if (!in_array($_W['role'], array(ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_FOUNDER, ACCOUNT_MANAGE_NAME_VICE_FOUNDER))) {
 		itoast('无权限操作！', referer(), 'error');
 	}
+
 
 $_W['page']['title'] = $account_typename . '回收站 - ' . $account_typename;
 
@@ -95,10 +95,10 @@ if($do == 'delete') {
 	$acid = intval($_GPC['acid']);
 	$state = permission_account_user_role($_W['uid'], $uniacid);
 	
-	
-		if (!in_array($state, array(ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_FOUNDER))) {
+		if (!in_array($state, array(ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_FOUNDER, ACCOUNT_MANAGE_NAME_VICE_FOUNDER))) {
 			itoast('没有权限！', referer(), 'error');
 		}
+	
 	
 	$jobid = account_delete($acid);
 	if (user_is_founder($_W['uid'], true)) {

@@ -23,7 +23,8 @@ if ($do == 'get_not_installed_modules') {
 }
 
 
-	if ($do == 'ext') {
+
+	if ($do == 'ext' && $_GPC['m'] != 'store' && !$_GPC['system_welcome']) {
 		if (!empty($_GPC['version_id'])) {
 			$version_info = miniapp_version($_GPC['version_id']);
 		}
@@ -36,7 +37,6 @@ if ($do == 'get_not_installed_modules') {
 			itoast('', $account_api->displayUrl);
 		}
 	}
-
 
 
 

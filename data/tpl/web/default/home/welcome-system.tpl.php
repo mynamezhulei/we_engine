@@ -3,6 +3,8 @@
 <div class="welcome-container js-system-welcome" ng-controller="WelcomeCtrl" ng-cloak>
 	<div ng-if="ads" class="ad-img we7-margin-bottom">
 		
+		<div ng-click="close_ads()" class="close">关闭</div>
+		
 		<div id="welcome-ad" class="carousel slide" data-ride="carousel">
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">

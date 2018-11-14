@@ -10,6 +10,10 @@
 		<h3 class="pull-left" ng-bind="user.username"></h3>
 		<div class="user-edit pull-right">
 			
+			{if $user['founder_groupid'] != ACCOUNT_MANAGE_GROUP_VICE_FOUNDER}
+			<a href="javascript:;" class="btn btn-primary" ng-click="recycleUser()">禁用</a>
+			{/if}
+			
 		</div>
 	</div>
 	<div class="btn-group we7-btn-group we7-padding-bottom">

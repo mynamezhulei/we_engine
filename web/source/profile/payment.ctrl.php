@@ -47,6 +47,10 @@ if ($do == 'save_setting') {
 	$setting = uni_setting_load('payment', $_W['uniacid']);
 	$pay_setting = $setting['payment'];
 	
+		if ($type == 'wechat_facilitator') {
+			$param['switch'] = $param['switch'] == 'true' ? true : false;
+		}
+	
 	if ($type == 'wechat') {
 		$param['account'] = $_W['acid'];
 		if ($param['switch'] == 1) {
@@ -105,6 +109,10 @@ MFF/yA==
 	$pay_setting[$type] = $param;
 	$payment = iserializer($pay_setting);
 	uni_setting_save('payment', $payment);
+	
+		if ($type == 'wechat_facilitator') {
+			cache_clean(cache_system_key('proxy_wechatpay_account:'));
+		}
 	
 	iajax(0, '设置成功！', referer());
 }

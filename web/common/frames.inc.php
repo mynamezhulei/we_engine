@@ -478,6 +478,19 @@ $we7_system_menu['account'] = array(
 					),
 				),
 				
+				'profile_bind_domain' => array(
+					'title' => '域名绑定',
+					'url' => url('profile/bind-domain'),
+					'icon' => 'wi wi-bind-domain',
+					'permission_name' => 'profile_bind_domain',
+					'is_display' => array(
+						ACCOUNT_TYPE_OFFCIAL_NORMAL,
+						ACCOUNT_TYPE_OFFCIAL_AUTH,
+						ACCOUNT_TYPE_XZAPP_NORMAL,
+						ACCOUNT_TYPE_XZAPP_AUTH,
+					),
+				),
+				
 				'webapp_module_link' => array(
 					'title' => "数据同步",
 					'url' => url('webapp/module-link-uniacid'),
@@ -498,6 +511,67 @@ $we7_system_menu['account'] = array(
 					),
 				),
 				
+				'webapp_bind_domain' => array(
+					'title' => '域名访问设置',
+					'url' => url('webapp/bind-domain'),
+					'icon' => 'wi wi-bind-domain',
+					'permission_name' => 'webapp_bind_domain',
+					'is_display' => array(
+						ACCOUNT_TYPE_WEBAPP_NORMAL,
+					),
+				),
+				
+			),
+		),
+		
+		'statistics' => array(
+			'title' => '统计',
+			'menu' => array(
+				'statistics_visit' => array(
+					'title' => '访问统计',
+					'url' => url('statistics/app'),
+					'icon' => 'wi wi-statistical',
+					'permission_name' => 'statistics_visit',
+					'is_display' => array(
+						ACCOUNT_TYPE_OFFCIAL_NORMAL,
+						ACCOUNT_TYPE_OFFCIAL_AUTH,
+						ACCOUNT_TYPE_XZAPP_NORMAL,
+						ACCOUNT_TYPE_XZAPP_AUTH,
+						ACCOUNT_TYPE_WEBAPP_NORMAL,
+					),
+					'sub_permission' => array(
+						'statistics_visit_app' => array(
+							'title' => 'app端访问统计信息',
+							'url' => url('statistics/app/display'),
+							'permission_name' => 'statistics_visit_app',
+							'active' => 'app',
+						),
+						'statistics_visit_site' => array(
+							'title' => '所有用户访问统计',
+							'url' => url('statistics/site/current_account'),
+							'permission_name' => 'statistics_visit_site',
+							'active' => 'site',
+						),
+						'statistics_visit_setting' => array(
+							'title' => '访问统计设置',
+							'url' => url('statistics/setting/display'),
+							'permission_name' => 'statistics_visit_setting',
+							'active' => 'setting',
+						),
+					),
+				),
+				'statistics_fans' => array(
+					'title' => '用户统计',
+					'url' => url('statistics/fans'),
+					'icon' => 'wi wi-statistical',
+					'permission_name' => 'statistics_fans',
+					'is_display' => array(
+						ACCOUNT_TYPE_OFFCIAL_NORMAL,
+						ACCOUNT_TYPE_OFFCIAL_AUTH,
+						ACCOUNT_TYPE_XZAPP_NORMAL,
+						ACCOUNT_TYPE_XZAPP_AUTH,
+					),
+				),
 			),
 		),
 		
@@ -641,6 +715,23 @@ $we7_system_menu['wxapp'] = array(
 					),
 				),
 			)
+		),
+		
+		'statistics' => array(
+			'title' => '统计',
+			'menu' => array(
+				'statistics_visit' => array(
+					'title' => '访问统计',
+					'url' => url('wxapp/statistics'),
+					'icon' => 'wi wi-statistical',
+					'permission_name' => 'statistics_visit_wxapp',
+					'is_display' => array(
+						ACCOUNT_TYPE_APP_NORMAL,
+						ACCOUNT_TYPE_APP_AUTH,
+						ACCOUNT_TYPE_WXAPP_WORK,
+					),
+				),
+			),
 		),
 		
 	),
@@ -814,6 +905,19 @@ $we7_system_menu['system'] = array(
 			)
 		),
 		
+		'welcome' => array(
+			'title' => '系统首页',
+			'menu' => array(
+				'system_welcome' => array(
+					'title' => '系统首页应用',
+					'url' => url('module/manage-system', array('support' => MODULE_SUPPORT_SYSTEMWELCOME_NAME)),
+					'icon' => 'wi wi-wxapp',
+					'permission_name' => 'system_welcome',
+				)
+			),
+			'founder' => true
+		),
+		
 		'sys_webapp' => array(
 			'title' => 'PC',
 			'menu' => array(
@@ -936,6 +1040,39 @@ $we7_system_menu['system'] = array(
 					),
 				),
 				
+				'system_user_founder_group' => array(
+					'title' => '副创始人组',
+					'url' => url('founder/display'),
+					'icon' =>'wi wi-co-founder',
+					'permission_name' =>'system_founder_manage',
+					'sub_permission' => array(
+						array(
+							'title' => '添加创始人组',
+							'permission_name' => 'system_founder_group_add',
+						),
+						array(
+							'title' => '编辑创始人组',
+							'permission_name' => 'system_founder_group_post',
+						),
+						array(
+							'title' => '删除创始人组',
+							'permission_name' => 'system_founder_group_del',
+						),
+						array(
+							'title' => '添加创始人',
+							'permission_name' => 'system_founder_user_add',
+						),
+						array(
+							'title' => '编辑创始人',
+							'permission_name' => 'system_founder_user_post',
+						),
+						array(
+							'title' => '删除创始人',
+							'permission_name' => 'system_founder_user_del',
+						),
+					),
+				),
+				
 			)
 		),
 		'permission' => array(
@@ -1021,6 +1158,18 @@ $we7_system_menu['system'] = array(
 					'icon' => 'wi wi-bell',
 					'permission_name' => 'system_message_notice',
 				)
+			)
+		),
+		
+		'system_statistics' => array(
+			'title' => '统计',
+			'menu' => array(
+				'system_account_analysis' => array(
+					'title' => 	'访问统计',
+					'url' => url('statistics/account'),
+					'icon' => 'wi wi-statistical',
+					'permission_name' => 'system_account_analysis',
+				),
 			)
 		),
 		
@@ -1226,6 +1375,13 @@ $we7_system_menu['custom_help'] = array(
 	'is_display' => 0,
 );
 
+
+	$we7_system_menu['store'] = array(
+		'title' => '商城',
+		'icon' => 'wi wi-store',
+		'url' => url('home/welcome/ext', array('m' => 'store')),
+		'section' => array(),
+	);
 
 
 return $we7_system_menu;
